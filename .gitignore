@@ -13,6 +13,7 @@ dist-ssr
 venv
 .env
 requirements.txt
+README2.md
 
 .vscode/*
 !.vscode/extensions.json
