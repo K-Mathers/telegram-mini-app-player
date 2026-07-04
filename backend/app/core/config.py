@@ -1,9 +1,9 @@
-# для управления конфигурацией приложения описываем класс подключения к бд
-from pydantic_settings import BaseSettings, SettingConfigDict
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Setting(BaseSettings):
     DATABASE_URL: str
+    BOT_TOKEN: str
 
-    model_config = SettingConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(env_file=".env")
 
 settings = Setting()
