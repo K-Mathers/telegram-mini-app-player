@@ -1,5 +1,5 @@
 from typing import Optional
-from sqlalchemy import ForeignKey
+from sqlalchemy import JSON, ForeignKey
 from app.core.database import Base
 from sqlalchemy.orm import Mapped, mapped_column 
 
@@ -13,4 +13,4 @@ class Track(Base):
     audio_url: Mapped[Optional[str]]
     cover_url: Mapped[Optional[str]]
     tg_file_id: Mapped[str] = mapped_column(unique=True)
-    tags: Mapped[str]
+    tags: Mapped[list[str]] = mapped_column(JSON)
