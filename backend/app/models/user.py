@@ -10,3 +10,4 @@ class User(Base):
     username: Mapped[str | None]
     first_name: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
+    is_admin: Mapped[bool] = mapped_column(default=False, server_default="false")

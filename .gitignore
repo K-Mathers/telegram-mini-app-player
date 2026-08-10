@@ -26,3 +26,7 @@ migrations/__pycache__/
 *.njsproj
 *.sln
 *.sw?
+
+# test files
+seed.py
+get_test_token.py

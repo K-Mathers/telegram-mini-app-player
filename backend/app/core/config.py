@@ -5,6 +5,9 @@ class Setting(BaseSettings):
     BOT_TOKEN: str
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_DAYS: int
+    SUPABASE_URL: str
+    SUPABASE_SERVICE_KEY: str
+    CORS_ORIGINS: str
 
     model_config = SettingsConfigDict(env_file=".env")
 

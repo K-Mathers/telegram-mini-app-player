@@ -27,6 +27,6 @@ async def get_albums_tracks(id: int, db: Annotated[AsyncSession, Depends(get_db)
         if album is None:
                 raise HTTPException(status_code=404, detail="Album not found")
         
-        tracks_query = select(Track).where(Track.album_id == id)
+        tracks_query = select(Track).where(Track.album_id == id).order_by(Track.id)
         tracks_result = await db.execute(tracks_query)
         return tracks_result.scalars().all()
