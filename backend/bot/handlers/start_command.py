@@ -2,9 +2,7 @@ from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
-
 router = Router()
-inputs = {}
 
 @router.message(Command("start"))
 async def start_cmd(message: Message):
