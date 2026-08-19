@@ -9,7 +9,7 @@ def validate_init_data(init_data: str, bot_token: str) -> bool:
     if not received_hash:
         raise ValueError("Invalid hash")
     
-    sorted_keys = sorted(parsed_data.keys())
+    sorted_keys = sorted([k for k in parsed_data.keys() if k != "hash"])
     data_check_str = "\n".join(f"{k}={parsed_data[k]}" for k in sorted_keys)
 
     secret_key = hmac.new(
