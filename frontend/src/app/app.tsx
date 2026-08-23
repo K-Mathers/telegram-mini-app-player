@@ -3,6 +3,7 @@ import { Routing } from "../pages/routes";
 import { authByTelegram, selectAuthStatus } from "@/entities/user";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./store";
+import Splash from "@/shared/ui/Splash/Splash";
 
 interface Iapp {}
 
@@ -18,11 +19,11 @@ export const App = ({}: Iapp) => {
   }, [dispatch]);
 
   if (status == "loading" || status == "idle") {
-    return <div>Загрузка...</div>;
+    return <Splash />;
   }
 
   if (status == "failed") {
-    return <div>Не удалось загрузить</div>;
+    return <div>Failed</div>;
   }
 
   return (
