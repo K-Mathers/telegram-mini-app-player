@@ -7,10 +7,16 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
-init();
-
-window.Telegram.WebApp.ready();
-window.Telegram.WebApp.expand();
+// after test delete
+try {
+  init();
+  if (window.Telegram?.WebApp) {
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+  }
+} catch (e) {
+  console.warn("App is running outside of Telegram");
+}
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

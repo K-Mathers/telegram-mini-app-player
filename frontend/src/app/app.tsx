@@ -5,16 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./store";
 import Splash from "@/shared/ui/Splash/Splash";
 
-interface Iapp {}
+interface Iapp { }
 
-export const App = ({}: Iapp) => {
+export const App = ({ }: Iapp) => {
   const dispatch = useDispatch<AppDispatch>();
   const status = useSelector(selectAuthStatus);
 
+  // after test delete
   useEffect(() => {
-    const initData = window.Telegram.WebApp.initData;
+    const initData = window.Telegram?.WebApp?.initData;
     if (initData) {
       dispatch(authByTelegram(initData));
+    } else {
+      dispatch({
+        type: "user/authByTelegram/fulfilled",
+        payload: { access_token: "mock", token_type: "Bearer" },
+      });
     }
   }, [dispatch]);
 
