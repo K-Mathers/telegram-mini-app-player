@@ -1,0 +1,115 @@
+.mini-player-container {
+  position: fixed;
+  bottom: 59px;
+  left: 0;
+  right: 0;
+  background-color: var(--tg-theme-secondary-bg-color, #1a1a1a);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  cursor: pointer;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  user-select: none;
+  animation: slideUp 0.3s ease-out;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mini-player-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.mini-player-progress-bar {
+  height: 100%;
+  background-color: var(--tg-theme-button-color, #fff);
+  transition: width 0.1s linear;
+}
+
+.mini-player-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+  height: 100%;
+}
+
+.mini-player-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-player-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.mini-player-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.mini-player-title {
+  color: var(--tg-theme-text-color, #fff);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-artist {
+  color: var(--tg-theme-hint-color, #a0a0a0);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.mini-player-btn {
+  background: none;
+  border: none;
+  color: var(--tg-theme-text-color, #fff);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.1s;
+}
+
+.mini-player-btn:active {
+  transform: scale(0.9);
+}
