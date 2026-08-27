@@ -1,0 +1,99 @@
+.album-detail-page {
+  padding: 16px;
+  padding-bottom: var(--safe-area-bottom, 100px);
+  background-color: var(--bg-surface, #121212);
+  min-height: 100vh;
+}
+
+.album-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.album-detail-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.album-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.album-hero-cover {
+  width: 240px;
+  height: 240px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.album-hero-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.album-hero-meta {
+  font-size: 14px;
+  color: var(--text-secondary, #8e8e93);
+  margin: 0;
+}
+
+.album-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.album-btn-play {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--text-primary, #ffffff);
+  color: var(--bg-root, #000000);
+  border: none;
+  border-radius: 24px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.album-btn-shuffle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #2a2a2a;
+  color: var(--text-primary, #ffffff);
+  border: none;
+  border-radius: 24px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.album-tracks-list {
+  display: flex;
+  flex-direction: column;
+}
