@@ -13,7 +13,7 @@ export const authByTelegram = createAsyncThunk<
   { rejectValue: string }
 >("user/authByTelegram", async (initData, { rejectWithValue }) => {
   try {
-    const { data } = await api.post<IAuthResponse>("api/v1/auth/verify", {
+    const { data } = await api.post<IAuthResponse>("/auth/verify", {
       initData,
     });
     localStorage.setItem("token", data.access_token);

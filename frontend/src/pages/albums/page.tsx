@@ -12,9 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { ListFilter } from "lucide-react";
 import "./page.css";
 
-interface Ipage { }
+interface Ipage {}
 
-export const ALbumsPage = ({ }: Ipage) => {
+export const ALbumsPage = ({}: Ipage) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 

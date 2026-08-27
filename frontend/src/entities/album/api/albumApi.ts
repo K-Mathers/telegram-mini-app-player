@@ -9,7 +9,7 @@ export const fetchAlbums = createAsyncThunk<
   { rejectValue: string }
 >("album/fetchAlbums", async (_, { rejectWithValue }) => {
   try {
-    return (await api.get<IAlbum[]>("/api/v1/albums")).data;
+    return (await api.get<IAlbum[]>("/albums")).data;
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       return rejectWithValue(err.response?.data.message ?? "Failed");
