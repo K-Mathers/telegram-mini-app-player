@@ -8,6 +8,12 @@ from app.models.track import Track
 
 router = APIRouter()
 
+@router.get("", response_model=list[TrackResponse])
+async def get_all_tracks(db: Annotated[AsyncSession, Depends(get_db)]):
+        query = select(Track)
+        result = await db.execute(query)
+        return result.scalars().all()
+
 @router.get("/search/", response_model=list[TrackResponse])
 async def get_tracks(q: str, db: Annotated[AsyncSession, Depends(get_db)]):
         # write search with tags 
