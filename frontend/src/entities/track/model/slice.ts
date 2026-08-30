@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { ITrack } from "./types";
-import { fetchAlbumTracks } from "../api/trackApi";
+import { fetchAlbumTracks, fetchAllTracks } from "../api/trackApi";
 import type { Status } from "@/shared/types/types";
 
 interface ITrackState {
   tracks: ITrack[];
   status: Status;
   error: string | null;
+  allTracks: ITrack[];
+  allTracksStatus: Status;
+  allTracksError: string | null;
 }
 
 const initialState: ITrackState = {
   tracks: [],
   status: "idle",
   error: null,
+  allTracks: [],
+  allTracksStatus: "idle",
+  allTracksError: null,
 };
 
 const trackSlice = createSlice({
@@ -38,6 +44,19 @@ const trackSlice = createSlice({
       .addCase(fetchAlbumTracks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload ?? "Unknown error";
+      })
+
+      .addCase(fetchAllTracks.pending, (state) => {
+        state.allTracksStatus = "loading";
+        state.allTracksError = null;
+      })
+      .addCase(fetchAllTracks.fulfilled, (state, action) => {
+        state.allTracksStatus = "succeeded";
+        state.allTracks = action.payload;
+      })
+      .addCase(fetchAllTracks.rejected, (state, action) => {
+        state.allTracksStatus = "failed";
+        state.allTracksError = action.payload ?? "Unknown error";
       });
   },
 });
