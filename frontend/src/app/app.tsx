@@ -4,12 +4,21 @@ import { authByTelegram, selectAuthStatus } from "@/entities/user";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "./store";
 import Splash from "@/shared/ui/Splash/Splash";
+import { selectCurrentTrack } from "@/entities/player";
+import { addToRecentlyPlayed } from "@/shared/lib/storage/recentlyPlayed";
 
-interface Iapp { }
+interface Iapp {}
 
-export const App = ({ }: Iapp) => {
+export const App = ({}: Iapp) => {
   const dispatch = useDispatch<AppDispatch>();
   const status = useSelector(selectAuthStatus);
+  const currentTrack = useSelector(selectCurrentTrack);
+
+  useEffect(() => {
+    if (currentTrack) {
+      addToRecentlyPlayed(currentTrack);
+    }
+  }, [currentTrack]);
 
   // after test delete
   useEffect(() => {

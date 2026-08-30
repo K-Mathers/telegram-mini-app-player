@@ -1,5 +1,6 @@
 const audio = new Audio();
 
+// except errors
 export const audioEngine = {
   audio,
   play(url: string) {
