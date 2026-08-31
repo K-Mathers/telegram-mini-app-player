@@ -1,0 +1,33 @@
+.page {
+  padding: 16px;
+  padding-bottom: var(--safe-area-bottom, 100px);
+  background-color: var(--bg-surface, #121212);
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.headerTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.headerTitleCenter {
+  text-align: center;
+}
+
+.headerLeft,
+.headerRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}

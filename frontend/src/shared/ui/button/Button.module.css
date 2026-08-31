@@ -1,0 +1,28 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.button:active {
+  opacity: 0.8;
+}
+
+.primary {
+  background-color: var(--text-primary, #ffffff);
+  color: var(--bg-root, #000000);
+}
+
+.secondary {
+  background-color: #2a2a2a;
+  color: var(--text-primary, #ffffff);
+}

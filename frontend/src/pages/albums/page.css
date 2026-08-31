@@ -1,25 +1,3 @@
-.albums-page {
-  padding: 16px;
-  padding-bottom: var(--safe-area-bottom, 100px);
-  background-color: var(--bg-surface, #121212);
-  min-height: 100vh;
-}
-
-.albums-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-
-.albums-header-text {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0;
-}
-
 .line {
   margin-bottom: 10px;
   width: 100%;

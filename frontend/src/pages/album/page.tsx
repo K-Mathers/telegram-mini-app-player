@@ -10,14 +10,15 @@ import Splash from "@/shared/ui/Splash/Splash";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, MoreHorizontal, Play, Shuffle } from "lucide-react";
+import { ArrowLeft, MoreHorizontal } from "lucide-react";
 import "./page.css";
-
 import { playTrack } from "@/features/play-track/model/playerNavigation";
+import { PlayActionButtons } from "@/features/play-collection";
+import { Page, PageHeader } from "@/shared/ui/page";
 
-interface Ipage {}
+interface Ipage { }
 
-export const AlbumDetailPage = ({}: Ipage) => {
+export const AlbumDetailPage = ({ }: Ipage) => {
   const { albumId } = useParams<{ albumId: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -43,15 +44,22 @@ export const AlbumDetailPage = ({}: Ipage) => {
   }
 
   return (
-    <div className="album-detail-page">
-      <header className="album-detail-header">
-        <button className="album-detail-icon-btn" onClick={() => navigate(-1)}>
-          <ArrowLeft size={24} />
-        </button>
-        <button className="album-detail-icon-btn">
-          <MoreHorizontal size={24} />
-        </button>
-      </header>
+    <Page>
+      <PageHeader
+        leftContent={
+          <button
+            className="album-detail-icon-btn"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowLeft size={24} />
+          </button>
+        }
+        rightContent={
+          <button className="album-detail-icon-btn">
+            <MoreHorizontal size={24} />
+          </button>
+        }
+      />
 
       <div className="album-hero">
         <img
@@ -63,14 +71,7 @@ export const AlbumDetailPage = ({}: Ipage) => {
         <p className="album-hero-meta">{tracks.length} Tracks</p>
       </div>
 
-      <div className="album-actions">
-        <button className="album-btn-play">
-          <Play size={20} fill="currentColor" /> Play All
-        </button>
-        <button className="album-btn-shuffle">
-          <Shuffle size={20} /> Shuffle
-        </button>
-      </div>
+      <PlayActionButtons tracks={tracks} collectionId={albumId} />
 
       <div className="album-tracks-list">
         {tracks.map((track, index) => (
@@ -82,7 +83,6 @@ export const AlbumDetailPage = ({}: Ipage) => {
           />
         ))}
       </div>
-
-    </div>
+    </Page>
   );
 };

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { ListFilter } from "lucide-react";
 import "./page.css";
 import type { AppDispatch } from "@/app/store";
+import { Page, PageHeader } from "@/shared/ui/page";
 
 export const HomePage = () => {
   const { recentlyPlayed, recommendation, status } = useHomeData();
@@ -19,10 +20,8 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="home-page">
-      <header className="home-header">
-        <h1 className="home-header-text">Home</h1>
-      </header>
+    <Page>
+      <PageHeader title="Home" />
 
       <div className="home-subheader">
         <h2 className="home-subheader-title">Recently Played</h2>
@@ -63,6 +62,6 @@ export const HomePage = () => {
           />
         ))}
       </div>
-    </div>
+    </Page>
   );
 };

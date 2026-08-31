@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ListFilter } from "lucide-react";
 import "./page.css";
+import { Page, PageHeader } from "@/shared/ui/page";
 
-interface Ipage {}
+interface Ipage { }
 
-export const ALbumsPage = ({}: Ipage) => {
+export const ALbumsPage = ({ }: Ipage) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -34,12 +35,8 @@ export const ALbumsPage = ({}: Ipage) => {
   }
 
   return (
-    <div className="albums-page">
-      <header className="albums-header">
-        <div className="albums-header-title">
-          <h1 className="albums-header-text">Albums</h1>
-        </div>
-      </header>
+    <Page>
+      <PageHeader title="Albums" />
 
       <div className="line"></div>
       <div className="albums-subheader">
@@ -59,6 +56,6 @@ export const ALbumsPage = ({}: Ipage) => {
           />
         ))}
       </div>
-    </div>
+    </Page>
   );
 };
