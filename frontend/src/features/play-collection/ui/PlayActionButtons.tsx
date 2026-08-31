@@ -1,4 +1,3 @@
-import React from "react";
 import { Play, Shuffle } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import styles from "./PlayActionButtons.module.css";

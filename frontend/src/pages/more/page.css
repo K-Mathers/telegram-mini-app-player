@@ -1,0 +1,71 @@
+.more-subheader-title {
+  font-size: 20px;
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.community-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface-hover, #1c1c1e);
+  border-radius: var(--radius-lg, 16px);
+  padding: 16px;
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  cursor: pointer;
+}
+
+.community-card:active {
+  transform: scale(0.98);
+  background-color: #252525;
+}
+
+.community-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.community-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #2c2c2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary, #ffffff);
+  flex-shrink: 0;
+}
+
+.community-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.community-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #ffffff);
+  margin: 0 0 4px 0;
+}
+
+.community-card-description {
+  font-size: 14px;
+  color: var(--text-secondary, #8e8e93);
+  margin: 0;
+}

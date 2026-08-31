@@ -13,9 +13,9 @@ import { ListFilter } from "lucide-react";
 import "./page.css";
 import { Page, PageHeader } from "@/shared/ui/page";
 
-interface Ipage { }
+interface Ipage {}
 
-export const ALbumsPage = ({ }: Ipage) => {
+export const ALbumsPage = ({}: Ipage) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
