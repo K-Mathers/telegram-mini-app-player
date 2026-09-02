@@ -1,4 +1,5 @@
 import { albumReducer } from "@/entities/album/model/slice";
+import { favoriteReducer } from "@/entities/favorites/model/slice";
 import { playerReducer } from "@/entities/player/model/slice";
 import { trackReducer } from "@/entities/track/model/slice";
 import { userReducer } from "@/entities/user";
@@ -10,6 +11,7 @@ export const store = configureStore({
     album: albumReducer,
     track: trackReducer,
     player: playerReducer,
+    favorites: favoriteReducer,
   },
 });
 
