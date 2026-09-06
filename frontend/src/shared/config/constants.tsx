@@ -2,7 +2,7 @@ import { Heart, Send } from "lucide-react";
 
 export const limit_tracks = 6;
 
-// fill 
+// fill
 export const COMMUNITY_LINKS = [
   {
     id: "boosty",

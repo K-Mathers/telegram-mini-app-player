@@ -2,6 +2,7 @@ import type { ITrack } from "../model/types";
 import { MoreVertical } from "lucide-react";
 import "./TrackCard.css";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
+import FavoriteBtn from "@/features/toggle-favorite/ui/FavoriteBtn/FavoriteBtn";
 
 interface ITrackCard {
   track: ITrack;
@@ -12,13 +13,24 @@ interface ITrackCard {
   isFavorite?: boolean;
 }
 
-export const TrackCard = ({ track, index, variant = "list", onClick, onToggleFavorite, isFavorite }: ITrackCard) => {
+export const TrackCard = ({
+  track,
+  index,
+  variant = "list",
+  onClick,
+  onToggleFavorite,
+  isFavorite,
+}: ITrackCard) => {
   if (variant === "grid") {
     return (
       <div className="track-card-grid" onClick={onClick}>
         <div className="track-card-cover-wrapper">
           {track.cover_url ? (
-            <img src={track.cover_url} alt={track.title} className="track-card-cover" />
+            <img
+              src={track.cover_url}
+              alt={track.title}
+              className="track-card-cover"
+            />
           ) : (
             <div className="track-card-cover-placeholder"></div>
           )}
@@ -36,7 +48,11 @@ export const TrackCard = ({ track, index, variant = "list", onClick, onToggleFav
       {index !== undefined && <div className="track-index">{index}</div>}
 
       {track.cover_url ? (
-        <img src={track.cover_url} alt={track.title} className="track-list-cover" />
+        <img
+          src={track.cover_url}
+          alt={track.title}
+          className="track-list-cover"
+        />
       ) : (
         <div className="track-list-cover-placeholder"></div>
       )}
@@ -47,8 +63,24 @@ export const TrackCard = ({ track, index, variant = "list", onClick, onToggleFav
       </div>
 
       <div className="track-right">
-        {track.duration_sec ? <span>{formatDuration(track.duration_sec)}</span> : null}
-        <button className="track-more-btn" onClick={(e) => { e.stopPropagation(); }}>
+        {track.duration_sec ? (
+          <span>{formatDuration(track.duration_sec)}</span>
+        ) : null}
+
+        {/* Replace with MoreVertical component */}
+        {onToggleFavorite && (
+          <FavoriteBtn
+            onClick={onToggleFavorite}
+            isFavorite={isFavorite ?? false}
+          />
+        )}
+
+        <button
+          className="track-more-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <MoreVertical size={16} />
         </button>
       </div>
