@@ -6,10 +6,13 @@ import { ListFilter } from "lucide-react";
 import "./page.css";
 import type { AppDispatch } from "@/app/store";
 import { Page, PageHeader } from "@/shared/ui/page";
+import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite";
+import { useFavoriteIds } from "@/shared/hooks/useFavoriteIds";
 
 export const HomePage = () => {
   const { recentlyPlayed, recommendation, status } = useHomeData();
   const dispatch = useDispatch<AppDispatch>();
+  const favoriteIds = useFavoriteIds();
 
   const handlePlayRecentlyPlayed = (track: ITrack) => {
     dispatch(playTrack(track, recentlyPlayed));
@@ -38,6 +41,8 @@ export const HomePage = () => {
               key={track.id}
               track={track}
               variant="grid"
+              isFavorite={favoriteIds.has(track.id)}
+              onToggleFavorite={() => dispatch(toggleFavorite(track))}
               onClick={() => handlePlayRecentlyPlayed(track)}
             />
           ))}
@@ -58,6 +63,8 @@ export const HomePage = () => {
             track={track}
             index={index + 1}
             variant="list"
+            isFavorite={favoriteIds.has(track.id)}
+            onToggleFavorite={() => dispatch(toggleFavorite(track))}
             onClick={() => handlePlayRecommendation(track)}
           />
         ))}

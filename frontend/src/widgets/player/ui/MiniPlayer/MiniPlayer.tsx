@@ -1,8 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentTrack, selectPlayerStatus, selectProgress, selectDuration, audioEngine } from "@/entities/player";
-import { nextTrack } from "@/features/play-track";
+import {
+  selectCurrentTrack,
+  selectPlayerStatus,
+  selectProgress,
+  selectDuration,
+  audioEngine,
+} from "@/entities/player";
+import { nextTrack, prevTrack } from "@/features/play-track";
 import type { AppDispatch } from "@/app/store";
-import { Play, Pause, SkipForward } from "lucide-react";
+import { Play, Pause, SkipForward, SkipBack } from "lucide-react";
 import "./MiniPlayer.css";
 
 interface MiniPlayerProps {
@@ -36,6 +42,11 @@ export const MiniPlayer = ({ onClick }: MiniPlayerProps) => {
     dispatch(nextTrack);
   };
 
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dispatch(prevTrack);
+  };
+
   return (
     <div className="mini-player-container" onClick={onClick}>
       <div className="mini-player-progress">
@@ -59,6 +70,9 @@ export const MiniPlayer = ({ onClick }: MiniPlayerProps) => {
         </div>
 
         <div className="mini-player-controls">
+          <button className="mini-player-btn" onClick={handlePrev}>
+            <SkipBack size={24} fill="currentColor" />
+          </button>
           <button className="mini-player-btn" onClick={togglePlay}>
             {status === "playing" ? (
               <Pause size={24} fill="currentColor" />

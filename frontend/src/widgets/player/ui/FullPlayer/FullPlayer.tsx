@@ -1,11 +1,10 @@
-
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrentTrack,
   selectPlayerStatus,
   selectProgress,
   selectDuration,
-  audioEngine
+  audioEngine,
 } from "@/entities/player";
 import { nextTrack, prevTrack } from "@/features/play-track";
 import type { AppDispatch } from "@/app/store";
@@ -18,11 +17,13 @@ import {
   Repeat,
   ChevronDown,
   MoreHorizontal,
-  Heart
 } from "lucide-react";
 import "./FullPlayer.css";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
 import { ProgressBar } from "@/shared/ui/ProgressBar";
+import FavoriteBtn from "@/features/toggle-favorite/ui/FavoriteBtn/FavoriteBtn";
+import { selectIsFavorite } from "@/entities/favorites/model/selectors";
+import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite";
 
 interface FullPlayerProps {
   isOpen: boolean;
@@ -35,6 +36,9 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
   const status = useSelector(selectPlayerStatus);
   const progress = useSelector(selectProgress);
   const duration = useSelector(selectDuration);
+
+  const isFavorite = useSelector(selectIsFavorite(currentTrack?.id ?? -1));
+
   if (!currentTrack) {
     return null;
   }
@@ -48,7 +52,7 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
   };
 
   return (
-    <div className={`full-player-container ${isOpen ? 'open' : ''}`}>
+    <div className={`full-player-container ${isOpen ? "open" : ""}`}>
       <div className="full-player-header">
         <button className="full-player-icon-btn" onClick={onClose}>
           <ChevronDown size={28} />
@@ -72,9 +76,11 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
           <h2 className="full-player-title">{currentTrack.title}</h2>
           <p className="full-player-artist">Eminem</p>
         </div>
-        <button className="full-player-icon-btn">
-          <Heart size={24} />
-        </button>
+
+        <FavoriteBtn
+          onClick={() => dispatch(toggleFavorite(currentTrack))}
+          isFavorite={isFavorite}
+        />
       </div>
 
       <div className="full-player-scrubber">
@@ -90,7 +96,10 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
         <button className="full-player-icon-btn secondary">
           <Shuffle size={20} />
         </button>
-        <button className="full-player-icon-btn primary" onClick={() => dispatch(prevTrack)}>
+        <button
+          className="full-player-icon-btn primary"
+          onClick={() => dispatch(prevTrack)}
+        >
           <SkipBack size={32} fill="currentColor" />
         </button>
         <button className="full-player-play-btn" onClick={togglePlay}>
@@ -100,7 +109,10 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
             <Play size={32} fill="currentColor" />
           )}
         </button>
-        <button className="full-player-icon-btn primary" onClick={() => dispatch(nextTrack)}>
+        <button
+          className="full-player-icon-btn primary"
+          onClick={() => dispatch(nextTrack)}
+        >
           <SkipForward size={32} fill="currentColor" />
         </button>
         <button className="full-player-icon-btn secondary">

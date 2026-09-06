@@ -1,0 +1,16 @@
+.full-player-icon-btn {
+  background: none;
+  border: none;
+  color: var(--tg-theme-text-color, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: opacity 0.2s;
+}
+
+.full-player-icon-btn:active {
+  opacity: 0.6;
+}

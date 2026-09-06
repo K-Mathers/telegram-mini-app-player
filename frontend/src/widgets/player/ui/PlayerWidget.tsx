@@ -6,6 +6,7 @@ import { usePlayerSync } from "@/shared/hooks/usePlayerSync";
 export const PlayerWidget = () => {
   const [isFullPlayerOpen, setIsFullPlayerOpen] = useState(false);
   usePlayerSync();
+
   return (
     <>
       <MiniPlayer onClick={() => setIsFullPlayerOpen(true)} />

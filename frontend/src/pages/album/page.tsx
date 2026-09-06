@@ -15,13 +15,16 @@ import "./page.css";
 import { playTrack } from "@/features/play-track/model/playerNavigation";
 import { PlayActionButtons } from "@/features/play-collection";
 import { Page, PageHeader } from "@/shared/ui/page";
+import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite";
+import { useFavoriteIds } from "@/shared/hooks/useFavoriteIds";
 
-interface Ipage { }
+interface Ipage {}
 
-export const AlbumDetailPage = ({ }: Ipage) => {
+export const AlbumDetailPage = ({}: Ipage) => {
   const { albumId } = useParams<{ albumId: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const favoriteIds = useFavoriteIds()
 
   const album = useSelector((state: RootState) =>
     albumId ? selectAlbumById(state, Number(albumId)) : undefined,
@@ -79,6 +82,8 @@ export const AlbumDetailPage = ({ }: Ipage) => {
             key={track.id}
             index={index + 1}
             track={track}
+            isFavorite={favoriteIds.has(track.id)}
+            onToggleFavorite={() => dispatch(toggleFavorite(track))}
             onClick={() => dispatch(playTrack(track, tracks))}
           />
         ))}
