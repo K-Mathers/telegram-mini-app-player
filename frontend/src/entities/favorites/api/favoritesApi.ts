@@ -26,5 +26,5 @@ export const addTrackToFavorites = async (trackId: number) => {
 };
 
 export const removeTrackFromFavorites = async (favoriteId: number) => {
-  await api.delete(`/playlist/${favoriteId}/remove-track`);
+  await api.delete(`/playlists/${favoriteId}/remove-track`);
 };

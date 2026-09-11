@@ -19,18 +19,23 @@ class AuthRequest(BaseModel):
 @router.post("/verify")
 async def verify_telegram_auth(request: AuthRequest, db: Annotated[AsyncSession, Depends(get_db)]):
     try:
-        validate_init_data(request.initData, settings.BOT_TOKEN)
+        if settings.DEBUG:
+            tg_id = 999999999
+            tg_username = "dev_test_user"
+            tg_first_name = "Dev"
+        else:
+            validate_init_data(request.initData, settings.BOT_TOKEN)
 
-        parsed_data= dict(parse_qsl(request.initData))
+            parsed_data= dict(parse_qsl(request.initData))
 
-        user_str = parsed_data.get("user")
-        if not user_str: 
-            raise ValueError("User data is missing")
-        user_data = json.loads(user_str)
+            user_str = parsed_data.get("user")
+            if not user_str: 
+                raise ValueError("User data is missing")
+            user_data = json.loads(user_str)
 
-        tg_id = user_data.get("id")
-        tg_username = user_data.get("username")
-        tg_first_name = user_data.get("first_name", "")
+            tg_id = user_data.get("id")
+            tg_username = user_data.get("username")
+            tg_first_name = user_data.get("first_name", "")
 
         query = select(User).where(User.telegram_id == tg_id)
         result = await db.execute(query)

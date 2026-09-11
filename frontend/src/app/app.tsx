@@ -6,6 +6,7 @@ import type { AppDispatch } from "./store";
 import Splash from "@/shared/ui/Splash/Splash";
 import { selectCurrentTrack } from "@/entities/player";
 import { addToRecentlyPlayed } from "@/shared/lib/storage/recentlyPlayed";
+import { fetchFavorites } from "@/entities/favorites";
 
 interface Iapp {}
 
@@ -23,15 +24,14 @@ export const App = ({}: Iapp) => {
   // after test delete
   useEffect(() => {
     const initData = window.Telegram?.WebApp?.initData;
-    if (initData) {
-      dispatch(authByTelegram(initData));
-    } else {
-      dispatch({
-        type: "user/authByTelegram/fulfilled",
-        payload: { access_token: "mock", token_type: "Bearer" },
-      });
-    }
+    dispatch(authByTelegram(initData));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      dispatch(fetchFavorites());
+    }
+  }, [status, dispatch]);
 
   if (status == "loading" || status == "idle") {
     return <Splash />;

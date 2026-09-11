@@ -17,7 +17,7 @@ export const toggleFavorite =
       dispatch(removeFavoriteLocal(track.id));
 
       try {
-        await removeTrackFromFavorites(existing.id);
+        await removeTrackFromFavorites(track.id);
       } catch {
         dispatch(addFavoriteLocal(existing));
       }

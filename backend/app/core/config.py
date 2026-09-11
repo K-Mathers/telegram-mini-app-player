@@ -8,6 +8,7 @@ class Setting(BaseSettings):
     SUPABASE_URL: str
     SUPABASE_SERVICE_KEY: str
     CORS_ORIGINS: str
+    DEBUG: bool = False
 
     model_config = SettingsConfigDict(env_file=".env")
 
