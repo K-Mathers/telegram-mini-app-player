@@ -3,6 +3,7 @@ import { favoriteReducer } from "@/entities/favorites/model/slice";
 import { playerReducer } from "@/entities/player/model/slice";
 import { trackReducer } from "@/entities/track/model/slice";
 import { userReducer } from "@/entities/user";
+import { sortReducer } from "@/features/sort-collection";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     track: trackReducer,
     player: playerReducer,
     favorites: favoriteReducer,
+    sort: sortReducer,
   },
 });
 
