@@ -4,7 +4,6 @@ import {
   fetchAlbums,
   selectAlbums,
   selectAlbumStatus,
-  type IAlbum,
 } from "@/entities/album";
 import Splash from "@/shared/ui/Splash/Splash";
 import { useEffect, useMemo } from "react";
@@ -15,9 +14,9 @@ import { Page, PageHeader } from "@/shared/ui/page";
 import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
 import { selectSortBy } from "@/features/sort-collection";
 
-interface Ipage { }
+interface Ipage {}
 
-export const ALbumsPage = ({ }: Ipage) => {
+export const ALbumsPage = ({}: Ipage) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -30,16 +29,15 @@ export const ALbumsPage = ({ }: Ipage) => {
   }, [dispatch]);
 
   const albumList = useMemo(() => {
-    return [...albums]
-      .sort((a, b) => {
-        if (filterTracks === "date") {
-          return new Date(b.year).getTime() - new Date(a.year).getTime()
-        }
-        if (filterTracks === "name") {
-          return a.title.localeCompare(b.title || "") ?? 0;
-        }
-        return 0;
-      })
+    return [...albums].sort((a, b) => {
+      if (filterTracks === "date") {
+        return new Date(b.year).getTime() - new Date(a.year).getTime();
+      }
+      if (filterTracks === "name") {
+        return a.title.localeCompare(b.title || "") ?? 0;
+      }
+      return 0;
+    });
   }, [filterTracks, albums]);
 
   if (status == "loading" || status == "idle") {

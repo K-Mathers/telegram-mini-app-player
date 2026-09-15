@@ -11,6 +11,7 @@ interface ITrackCard {
   onClick: () => void;
   onToggleFavorite?: () => void;
   isFavorite?: boolean;
+  dragListeners?: Record<string, unknown>;
 }
 
 export const TrackCard = ({
@@ -20,6 +21,7 @@ export const TrackCard = ({
   onClick,
   onToggleFavorite,
   isFavorite,
+  dragListeners,
 }: ITrackCard) => {
   if (variant === "grid") {
     return (
@@ -76,10 +78,9 @@ export const TrackCard = ({
         )}
 
         <button
-          className="track-more-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+          className={`track-more-btn${dragListeners ? " track-more-btn--drag" : ""}`}
+          onClick={(e) => e.stopPropagation()}
+          {...(dragListeners ?? {})}
         >
           <MoreVertical size={16} />
         </button>

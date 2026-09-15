@@ -1,0 +1,13 @@
+.sortable-track-wrapper--dragging .track-item {
+  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.track-more-btn--drag {
+  cursor: grab;
+}
+
+.track-more-btn--drag:active {
+  cursor: grabbing;
+}
