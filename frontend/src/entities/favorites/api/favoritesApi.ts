@@ -28,3 +28,20 @@ export const addTrackToFavorites = async (trackId: number) => {
 export const removeTrackFromFavorites = async (favoriteId: number) => {
   await api.delete(`/playlists/${favoriteId}/remove-track`);
 };
+
+export const reorderFavorites = createAsyncThunk<
+  IFavorite[],
+  number[],
+  { rejectValue: string }
+>("playlist/reorderFavorites", async (trackIds, { rejectWithValue }) => {
+  try {
+    return (
+      await api.put<IFavorite[]>("/playlists/reorder", { track_ids: trackIds })
+    ).data;
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      return rejectWithValue(err.response?.data.message ?? "Failed");
+    }
+    return rejectWithValue("Unknown error");
+  }
+});

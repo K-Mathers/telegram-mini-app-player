@@ -31,6 +31,11 @@ const favoriteSlice = createSlice({
       state.status = "succeeded";
       state.error = null;
     },
+    reorderFavoriteLocal(state, action: PayloadAction<IFavorite[]>) {
+      state.favorites = action.payload
+      state.status = "succeeded"
+      state.error = null
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -45,9 +50,9 @@ const favoriteSlice = createSlice({
       .addCase(fetchFavorites.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload ?? "Uknown error";
-      });
+      })
   },
 });
 
-export const { addFavoriteLocal, removeFavoriteLocal } = favoriteSlice.actions;
+export const { addFavoriteLocal, removeFavoriteLocal, reorderFavoriteLocal } = favoriteSlice.actions;
 export const favoriteReducer = favoriteSlice.reducer;
