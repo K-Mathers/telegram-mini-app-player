@@ -1,12 +1,143 @@
-.albums-filter-btn {
-  width: 32px;
-  height: 32px;
+.sort-btn-wrapper {
+  position: relative;
+}
+
+.sort-trigger-btn {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background-color: #2a2a2a;
-  border: none;
+  border: 1.5px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
+  color: var(--text-secondary, #8e8e93);
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.sort-trigger-btn:hover {
+  background-color: rgba(255, 255, 255, 0.13);
+  color: var(--text-primary, #fff);
+}
+
+.sort-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  overflow: hidden;
+  animation: sort-fade-in 0.15s ease;
+}
+
+@keyframes sort-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sort-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary, #8e8e93);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sort-dropdown-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #8e8e93);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+
+.sort-dropdown-close:hover {
+  color: var(--text-primary, #fff);
+}
+
+.sort-dropdown-options {
+  padding: 6px;
+}
+
+.sort-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 10px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+.sort-option:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.sort-option--active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sort-option-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #8e8e93);
+  flex-shrink: 0;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.sort-option--active .sort-option-icon {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.sort-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.sort-option-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #fff);
+}
+
+.sort-option-desc {
+  font-size: 11px;
+  color: var(--text-secondary, #8e8e93);
+}
+
+.sort-option-check {
+  color: #ffffff;
+  flex-shrink: 0;
 }

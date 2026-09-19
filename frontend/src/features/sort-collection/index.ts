@@ -1,2 +1,1 @@
-export { setSortBy, sortReducer } from "./model/slice";
-export { selectSortBy } from "./model/selectors";
+export { setSortBy, sortReducer, selectSortBy } from "./model/slice";

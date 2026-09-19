@@ -1,46 +1,60 @@
-import { ListFilter } from "lucide-react";
+import { ListFilter, Check } from "lucide-react";
 import "./SortCollectionBtn.css";
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "@/app/store";
-import { setSortBy } from "../model/slice";
+import { setSortBy, selectSortBy } from "../model/slice";
+import { useState } from "react";
+import { useClickOutside } from "@/shared/hooks/useClickOutside";
+import { SORT_OPTIONS } from "../model/config";
 
-interface ISortCollectionBtn { }
+const SortCollectionBtn = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const sortBy = useSelector(selectSortBy);
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useClickOutside(() => setIsOpen(false))
 
-const SortCollectionBtn = ({ }: ISortCollectionBtn) => {
-  const dispatch = useDispatch<AppDispatch>()
-
-  const menuItmes: MenuProps["items"] = [
-    {
-      key: "date",
-      label: "Date",
-    },
-    {
-      key: "name",
-      label: "Name",
-    },
-    {
-      key: "default",
-      label: "Default",
-    },
-  ];
-
-  const handleMenuClick = ({ key }: { key: string }) => {
-    dispatch(setSortBy(key))
+  const handleSelect = (key: string) => {
+    dispatch(setSortBy(key));
+    setIsOpen(false);
   };
 
   return (
-    <div>
-      <Dropdown
-        trigger={["click"]}
-        menu={{ items: menuItmes, onClick: handleMenuClick }}
-        placement="bottomLeft"
+    <div className="sort-btn-wrapper" ref={ref}>
+      <button
+        className="sort-trigger-btn"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-label="Sort options"
       >
-        <button className="albums-filter-btn">
-          <ListFilter size={16} />
-        </button>
-      </Dropdown>
+        <ListFilter size={16} />
+      </button>
+
+      {isOpen && (
+        <div className="sort-dropdown">
+          <div className="sort-dropdown-header">
+            <span>SORT BY</span>
+            <button className="sort-dropdown-close" onClick={() => setIsOpen(false)}>✕</button>
+          </div>
+
+          <div className="sort-dropdown-options">
+            {SORT_OPTIONS.map((option) => (
+              <button
+                key={option.key}
+                className={`sort-option${sortBy === option.key ? " sort-option--active" : ""}`}
+                onClick={() => handleSelect(option.key)}
+              >
+                <div className="sort-option-icon">{option.icon}</div>
+                <div className="sort-option-text">
+                  <span className="sort-option-label">{option.label}</span>
+                  <span className="sort-option-desc">{option.description}</span>
+                </div>
+                {sortBy === option.key && (
+                  <Check size={16} className="sort-option-check" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

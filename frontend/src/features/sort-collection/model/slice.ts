@@ -20,3 +20,4 @@ const sortSlice = createSlice({
 
 export const { setSortBy } = sortSlice.actions
 export const sortReducer = sortSlice.reducer
+export const selectSortBy = (state: { sort: ISortState }) => state.sort.sortBy
