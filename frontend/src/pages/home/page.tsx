@@ -2,17 +2,19 @@ import { useHomeData } from "@/shared/hooks/useHomeData";
 import { TrackCard, type ITrack } from "@/entities/track";
 import { playTrack } from "@/features/play-track";
 import { useDispatch } from "react-redux";
-import { ListFilter } from "lucide-react";
 import "./page.css";
 import type { AppDispatch } from "@/app/store";
 import { Page, PageHeader } from "@/shared/ui/page";
 import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite";
 import { useFavoriteIds } from "@/shared/hooks/useFavoriteIds";
+import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
+import { useSortedTracks } from "@/features/sort-collection/model/useSortedTracks";
 
 export const HomePage = () => {
-  const { recentlyPlayed, recommendation, status } = useHomeData();
+  const { recentlyPlayed, recommendation } = useHomeData();
   const dispatch = useDispatch<AppDispatch>();
   const favoriteIds = useFavoriteIds();
+  const sortedTracks = useSortedTracks(recommendation);
 
   const handlePlayRecentlyPlayed = (track: ITrack) => {
     dispatch(playTrack(track, recentlyPlayed));
@@ -51,13 +53,11 @@ export const HomePage = () => {
 
       <div className="home-subheader" style={{ marginTop: "24px" }}>
         <h2 className="home-subheader-title">Recommendations</h2>
-        <button className="home-filter-btn">
-          <ListFilter size={16} />
-        </button>
+        <SortCollectionBtn />
       </div>
 
       <div className="recommendations-list">
-        {recommendation.map((track, index) => (
+        {sortedTracks.map((track, index) => (
           <TrackCard
             key={track.id}
             track={track}

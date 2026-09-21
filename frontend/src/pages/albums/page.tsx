@@ -6,39 +6,26 @@ import {
   selectAlbumStatus,
 } from "@/entities/album";
 import Splash from "@/shared/ui/Splash/Splash";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./page.css";
 import { Page, PageHeader } from "@/shared/ui/page";
 import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
-import { selectSortBy } from "@/features/sort-collection";
+import { useSortedTracks } from "@/features/sort-collection/model/useSortedTracks";
 
 interface Ipage {}
 
 export const ALbumsPage = ({}: Ipage) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
   const albums = useSelector(selectAlbums);
   const status = useSelector(selectAlbumStatus);
-  const filterTracks = useSelector(selectSortBy);
+  const sortedAlbums = useSortedTracks(albums);
 
   useEffect(() => {
     dispatch(fetchAlbums());
   }, [dispatch]);
-
-  const albumList = useMemo(() => {
-    return [...albums].sort((a, b) => {
-      if (filterTracks === "date") {
-        return new Date(b.year).getTime() - new Date(a.year).getTime();
-      }
-      if (filterTracks === "name") {
-        return a.title.localeCompare(b.title || "") ?? 0;
-      }
-      return 0;
-    });
-  }, [filterTracks, albums]);
 
   if (status == "loading" || status == "idle") {
     return <Splash />;
@@ -59,7 +46,7 @@ export const ALbumsPage = ({}: Ipage) => {
       </div>
 
       <div className="albums-list">
-        {albumList.map((album) => (
+        {sortedAlbums.map((album) => (
           <AlbumCard
             key={album.id}
             album={album}

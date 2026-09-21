@@ -14,7 +14,6 @@ import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite"
 import { PlayActionButtons } from "@/features/play-collection";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
 import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
-import { selectSortBy } from "@/features/sort-collection";
 import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -23,30 +22,14 @@ import {
 } from "@dnd-kit/sortable";
 import { reorderFavorites } from "@/entities/favorites/api/favoritesApi";
 import { reorderFavoriteLocal } from "@/entities/favorites/model/slice";
+import { useSortedFavorites } from "@/features/sort-collection/model/useSortedFavorites";
 
 export const PlaylistPage = () => {
   const favorites = useSelector(favoriteTracks);
   const allTracks = useSelector(selectAllTracks);
-  const filterTracks = useSelector(selectSortBy);
   const dispatch = useDispatch<AppDispatch>();
 
-  const favoritesList = useMemo(() => {
-    return [...favorites]
-      .sort((a, b) => {
-        if (filterTracks === "date") {
-          return (
-            new Date(b.added_at).getTime() - new Date(a.added_at).getTime()
-          );
-        } else if (filterTracks === "name") {
-          const trackA = allTracks.find((t) => t.id === a.track_id);
-          const trackB = allTracks.find((t) => t.id === b.track_id);
-          return trackA?.title.localeCompare(trackB?.title || "") ?? 0;
-        }
-        return 0;
-      })
-      .map((fav) => allTracks.find((track) => track.id === fav.track_id))
-      .filter((el): el is ITrack => el !== undefined);
-  }, [favorites, allTracks, filterTracks]);
+  const favoritesList = useSortedFavorites(favorites, allTracks);
 
   const totalDuration = useMemo(
     () =>
@@ -83,8 +66,7 @@ export const PlaylistPage = () => {
       <PageHeader title="Playlists" />
 
       <div className="playlist-subheader">
-        {/* rework */}
-        <div className="test-1">
+        <div className="playlist-btn">
           <SortCollectionBtn />
         </div>
         <h2 className="playlist-subheader-title">Liked Songs</h2>

@@ -11,7 +11,7 @@ const SortCollectionBtn = () => {
   const dispatch = useDispatch<AppDispatch>();
   const sortBy = useSelector(selectSortBy);
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useClickOutside(() => setIsOpen(false))
+  const ref = useClickOutside(() => setIsOpen(false));
 
   const handleSelect = (key: string) => {
     dispatch(setSortBy(key));
@@ -32,7 +32,12 @@ const SortCollectionBtn = () => {
         <div className="sort-dropdown">
           <div className="sort-dropdown-header">
             <span>SORT BY</span>
-            <button className="sort-dropdown-close" onClick={() => setIsOpen(false)}>✕</button>
+            <button
+              className="sort-dropdown-close"
+              onClick={() => setIsOpen(false)}
+            >
+              ✕
+            </button>
           </div>
 
           <div className="sort-dropdown-options">

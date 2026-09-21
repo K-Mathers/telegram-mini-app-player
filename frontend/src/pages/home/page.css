@@ -12,16 +12,6 @@
   margin: 0;
 }
 
-.home-filter-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
 .recently-played-scroll {
   display: flex;
   overflow-x: auto;
