@@ -11,5 +11,6 @@ export {
   selectPlayerStatus,
   selectProgress,
   selectDuration,
+  selectQueue,
 } from "./model/selectors";
 export type { IPlayerState } from "./model/types";

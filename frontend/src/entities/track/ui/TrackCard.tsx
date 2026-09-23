@@ -62,14 +62,14 @@ export const TrackCard = ({
       <div className="track-info">
         <h3 className="track-title">{track.title}</h3>
         <p className="track-artist">Eminem</p>
+        <p className="track-duration">
+          {track.duration_sec ? (
+            <span>{formatDuration(track.duration_sec)}</span>
+          ) : null}
+        </p>
       </div>
 
       <div className="track-right">
-        {track.duration_sec ? (
-          <span>{formatDuration(track.duration_sec)}</span>
-        ) : null}
-
-        {/* Replace with MoreVertical component */}
         {onToggleFavorite && (
           <FavoriteBtn
             onClick={onToggleFavorite}

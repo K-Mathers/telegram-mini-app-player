@@ -5,8 +5,9 @@ import {
   selectProgress,
   selectDuration,
   audioEngine,
+  selectQueue,
 } from "@/entities/player";
-import { nextTrack, prevTrack } from "@/features/play-track";
+import { nextTrack, playTrack, prevTrack } from "@/features/play-track";
 import type { AppDispatch } from "@/app/store";
 import {
   Play,
@@ -36,8 +37,8 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
   const status = useSelector(selectPlayerStatus);
   const progress = useSelector(selectProgress);
   const duration = useSelector(selectDuration);
-
   const isFavorite = useSelector(selectIsFavorite(currentTrack?.id ?? -1));
+  const queue = useSelector(selectQueue)
 
   if (!currentTrack) {
     return null;
@@ -48,6 +49,17 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
       audioEngine.pause();
     } else {
       audioEngine.resume();
+    }
+  };
+
+  const toggleRepeat = () => {
+    audioEngine.seek(0);
+  };
+
+  const toggleShuffle = () => {
+    if (queue.length > 0) {
+      const randomIndex = Math.floor(Math.random() * queue.length)
+      dispatch(playTrack(queue[randomIndex], queue))
     }
   };
 
@@ -93,7 +105,7 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
       </div>
 
       <div className="full-player-controls">
-        <button className="full-player-icon-btn secondary">
+        <button className="full-player-icon-btn secondary" onClick={toggleShuffle}>
           <Shuffle size={20} />
         </button>
         <button
@@ -115,7 +127,7 @@ export const FullPlayer = ({ isOpen, onClose }: FullPlayerProps) => {
         >
           <SkipForward size={32} fill="currentColor" />
         </button>
-        <button className="full-player-icon-btn secondary">
+        <button className="full-player-icon-btn secondary" onClick={toggleRepeat}>
           <Repeat size={20} />
         </button>
       </div>
