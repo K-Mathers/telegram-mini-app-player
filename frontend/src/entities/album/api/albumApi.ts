@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { IAlbum } from "../model/types";
 import { api } from "@/shared/api/api";
-import axios from "axios";
+import { handleAxiosError } from "@/shared/lib/api/handleAxiosError";
 
 export const fetchAlbums = createAsyncThunk<
   IAlbum[],
@@ -10,10 +10,7 @@ export const fetchAlbums = createAsyncThunk<
 >("album/fetchAlbums", async (_, { rejectWithValue }) => {
   try {
     return (await api.get<IAlbum[]>("/albums")).data;
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data.message ?? "Failed");
-    }
-    return rejectWithValue("Unknown error");
+  } catch (err) {
+    return rejectWithValue(handleAxiosError(err));
   }
 });

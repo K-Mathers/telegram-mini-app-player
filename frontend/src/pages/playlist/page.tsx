@@ -1,6 +1,6 @@
 import type { AppDispatch } from "@/app/store";
 import "./page.css";
-import { favoriteTracks } from "@/entities/favorites";
+import { selectFavorites } from "@/entities/favorites";
 import {
   selectAllTracks,
   SortableTrackCard,
@@ -25,7 +25,7 @@ import { reorderFavoriteLocal } from "@/entities/favorites/model/slice";
 import { useSortedFavorites } from "@/features/sort-collection/model/useSortedFavorites";
 
 export const PlaylistPage = () => {
-  const favorites = useSelector(favoriteTracks);
+  const favorites = useSelector(selectFavorites);
   const allTracks = useSelector(selectAllTracks);
   const dispatch = useDispatch<AppDispatch>();
 

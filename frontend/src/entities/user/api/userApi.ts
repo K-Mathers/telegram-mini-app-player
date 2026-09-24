@@ -1,6 +1,6 @@
 import { api } from "@/shared/api/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { handleAxiosError } from "@/shared/lib/api/handleAxiosError";
 
 interface IAuthResponse {
   access_token: string;
@@ -18,10 +18,7 @@ export const authByTelegram = createAsyncThunk<
     });
     localStorage.setItem("token", data.access_token);
     return data;
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data?.message ?? "Auth failed");
-    }
-    return rejectWithValue("Unknown error");
+  } catch (err) {
+    return rejectWithValue(handleAxiosError(err, "Auth failed"));
   }
 });

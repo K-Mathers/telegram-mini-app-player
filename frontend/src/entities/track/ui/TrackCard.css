@@ -8,6 +8,50 @@
   margin-bottom: 4px;
 }
 
+.track-item-active {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+  width: 16px;
+}
+
+.equalizer-bar {
+  width: 3px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  animation: equalize 1.2s ease-in-out infinite;
+}
+
+.equalizer-bar:nth-child(1) {
+  animation-delay: 0s;
+  height: 60%;
+}
+
+.equalizer-bar:nth-child(2) {
+  animation-delay: 0.2s;
+  height: 100%;
+}
+
+.equalizer-bar:nth-child(3) {
+  animation-delay: 0.4s;
+  height: 40%;
+}
+
+@keyframes equalize {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
 .track-item:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }

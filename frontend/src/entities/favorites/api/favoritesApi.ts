@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { IFavorite } from "../model/types";
 import { api } from "@/shared/api/api";
-import axios from "axios";
+import { handleAxiosError } from "@/shared/lib/api/handleAxiosError";
 
 export const fetchFavorites = createAsyncThunk<
   IFavorite[],
@@ -10,11 +10,8 @@ export const fetchFavorites = createAsyncThunk<
 >("playlist/fetchFavorites", async (_, { rejectWithValue }) => {
   try {
     return (await api.get<IFavorite[]>("/playlists")).data;
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data.message ?? "Failed");
-    }
-    return rejectWithValue("Unknown error");
+  } catch (err) {
+    return rejectWithValue(handleAxiosError(err));
   }
 });
 
@@ -38,10 +35,7 @@ export const reorderFavorites = createAsyncThunk<
     return (
       await api.put<IFavorite[]>("/playlists/reorder", { track_ids: trackIds })
     ).data;
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data.message ?? "Failed");
-    }
-    return rejectWithValue("Unknown error");
+  } catch (err) {
+    return rejectWithValue(handleAxiosError(err));
   }
 });

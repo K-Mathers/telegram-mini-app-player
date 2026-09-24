@@ -49,7 +49,7 @@ const favoriteSlice = createSlice({
       })
       .addCase(fetchFavorites.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload ?? "Uknown error";
+        state.error = action.payload ?? "Unknown error";
       })
   },
 });

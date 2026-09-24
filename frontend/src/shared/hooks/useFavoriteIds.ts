@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { favoriteTracks } from "@/entities/favorites";
+import { selectFavorites } from "@/entities/favorites";
 import { useMemo } from "react";
 
 export const useFavoriteIds = () => {
-  const favorites = useSelector(favoriteTracks);
+  const favorites = useSelector(selectFavorites);
 
   const favoriteId = useMemo(
     () => new Set(favorites.map((el) => el.track_id)),

@@ -9,7 +9,7 @@ interface IFavoriteBtn {
 const FavoriteBtn = ({ isFavorite, onClick }: IFavoriteBtn) => {
   return (
     <button
-      className="track-more-btn"
+      className={`favorite-btn${isFavorite ? " favorite-btn--active" : ""}`}
       onClick={(e) => {
         e.stopPropagation();
         onClick();

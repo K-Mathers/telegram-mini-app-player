@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { ITrack } from "../model/types";
 import { api } from "@/shared/api/api";
-import axios from "axios";
+import { handleAxiosError } from "@/shared/lib/api/handleAxiosError";
 
 export const fetchAllTracks = createAsyncThunk<
   ITrack[],
@@ -10,11 +10,8 @@ export const fetchAllTracks = createAsyncThunk<
 >("track/fetchAllTracks", async (_, { rejectWithValue }) => {
   try {
     return (await api.get<ITrack[]>("/tracks")).data;
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data.message ?? "Failed");
-    }
-    return rejectWithValue("Unknown error");
+  } catch (err) {
+    return rejectWithValue(handleAxiosError(err));
   }
 });
 
@@ -26,9 +23,6 @@ export const fetchAlbumTracks = createAsyncThunk<
   try {
     return (await api.get<ITrack[]>(`/albums/${id}/tracks`)).data;
   } catch (err) {
-    if (axios.isAxiosError(err)) {
-      return rejectWithValue(err.response?.data.message ?? "Failed");
-    }
-    return rejectWithValue("Unknown error");
+    return rejectWithValue(handleAxiosError(err));
   }
 });

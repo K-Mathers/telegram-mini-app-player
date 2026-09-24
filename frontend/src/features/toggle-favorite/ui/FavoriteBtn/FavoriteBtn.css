@@ -1,16 +1,15 @@
-.full-player-icon-btn {
-  background: none;
+.favorite-btn {
+  background: transparent;
   border: none;
-  color: var(--tg-theme-text-color, #fff);
+  color: var(--text-secondary, #8e8e93);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  transition: opacity 0.2s;
+  padding: 4px;
+  transition: color 0.2s;
 }
 
-.full-player-icon-btn:active {
-  opacity: 0.6;
+.favorite-btn--active {
+  color: var(--tg-theme-button-color, #ffffff);
 }

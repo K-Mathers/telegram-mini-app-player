@@ -14,9 +14,7 @@
   --spacing-container: 16px;
   --tabbar-height: 64px;
   --miniplayer-height: 60px;
-  --safe-area-bottom: calc(
-    var(--tabbar-height) + var(--miniplayer-height) + 16px
-  );
+  --safe-area-bottom: calc(var(--tabbar-height) + var(--miniplayer-height) + 16px);
 
   --font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "Roboto", sans-serif;
@@ -42,4 +40,26 @@ body {
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.icon-btn:active {
+  opacity: 0.6;
 }

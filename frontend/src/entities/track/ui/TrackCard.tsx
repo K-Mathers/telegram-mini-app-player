@@ -3,6 +3,8 @@ import { MoreVertical } from "lucide-react";
 import "./TrackCard.css";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
 import FavoriteBtn from "@/features/toggle-favorite/ui/FavoriteBtn/FavoriteBtn";
+import { useSelector } from "react-redux";
+import { selectCurrentTrack } from "@/entities/player";
 
 interface ITrackCard {
   track: ITrack;
@@ -23,6 +25,8 @@ export const TrackCard = ({
   isFavorite,
   dragListeners,
 }: ITrackCard) => {
+  const currentTrack = useSelector(selectCurrentTrack);
+
   if (variant === "grid") {
     return (
       <div className="track-card-grid" onClick={onClick}>
@@ -46,8 +50,23 @@ export const TrackCard = ({
   }
 
   return (
-    <div className="track-item" onClick={onClick}>
-      {index !== undefined && <div className="track-index">{index}</div>}
+    <div
+      className={`track-item ${currentTrack?.id === track.id ? "track-item-active" : ""}`}
+      onClick={onClick}
+    >
+      {index !== undefined && (
+        <div className="track-index">
+          {currentTrack?.id === track.id ? (
+            <div className="equalizer">
+              <div className="equalizer-bar" />
+              <div className="equalizer-bar" />
+              <div className="equalizer-bar" />
+            </div>
+          ) : (
+            index
+          )}
+        </div>
+      )}
 
       {track.cover_url ? (
         <img

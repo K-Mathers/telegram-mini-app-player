@@ -37,7 +37,7 @@ const albumSlice = createSlice({
       })
       .addCase(fetchAlbums.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload ?? "Unknow error";
+        state.error = action.payload ?? "Unknown error";
       });
   },
 });
