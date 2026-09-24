@@ -2,7 +2,6 @@ import { Heart, Send } from "lucide-react";
 
 export const limit_tracks = 6;
 
-// fill (page more)
 export const COMMUNITY_LINKS = [
   {
     id: "boosty",
@@ -10,7 +9,7 @@ export const COMMUNITY_LINKS = [
     description: "Help us keep the music ad-free",
     icon: <Heart fill="currentColor" size={24} />,
     buttonText: "Donate",
-    href: "",
+    href: "https://boosty.to/musicmadeus",
   },
   {
     id: "telegram",
@@ -18,6 +17,6 @@ export const COMMUNITY_LINKS = [
     description: "News, updates & exclusive mixes",
     icon: <Send size={24} />,
     buttonText: "Join",
-    href: "https://t.me/",
+    href: "https://t.me/musicmadeus",
   },
 ];

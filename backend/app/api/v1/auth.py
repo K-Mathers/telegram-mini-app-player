@@ -10,6 +10,17 @@ from app.core.database import get_db
 import json
 from app.models.user import User
 from app.core.security import create_access_token
+import warnings
+
+if settings.DEBUG:
+    warnings.warn(
+        "\n" + "=" * 60 +
+        "\n⚠️  DEBUG=True: Telegram auth validation is BYPASSED." +
+        "\n   Any request will receive a token for dev_test_user." +
+        "\n   DO NOT deploy to production with DEBUG=True!" +
+        "\n" + "=" * 60,
+        stacklevel=1
+    )
 
 router = APIRouter()
 

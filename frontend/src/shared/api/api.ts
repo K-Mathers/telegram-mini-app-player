@@ -19,3 +19,14 @@ api.interceptors.request.use(
     return Promise.reject(err);
   },
 );
+
+api.interceptors.response.use(
+  (response) => response,
+  (err) => {
+    if (axios.isAxiosError(err) && err.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.dispatchEvent(new Event("auth:expired"));
+    }
+    return Promise.reject(err);
+  },
+);
