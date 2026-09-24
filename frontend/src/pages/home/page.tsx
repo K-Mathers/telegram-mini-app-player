@@ -1,5 +1,5 @@
 import { useHomeData } from "@/shared/hooks/useHomeData";
-import { TrackCard, type ITrack } from "@/entities/track";
+import { TrackCard, TrackCardSkeleton, type ITrack } from "@/entities/track";
 import { playTrack } from "@/features/play-track";
 import { useDispatch } from "react-redux";
 import "./page.css";
@@ -57,17 +57,21 @@ export const HomePage = () => {
       </div>
 
       <div className="recommendations-list">
-        {sortedTracks.map((track, index) => (
-          <TrackCard
-            key={track.id}
-            track={track}
-            index={index + 1}
-            variant="list"
-            isFavorite={favoriteIds.has(track.id)}
-            onToggleFavorite={() => dispatch(toggleFavorite(track))}
-            onClick={() => handlePlayRecommendation(track)}
-          />
-        ))}
+        {status === "loading" || status === "idle"
+          ? Array.from({ length: 5 }).map((_, i) => (
+              <TrackCardSkeleton key={i} />
+            ))
+          : sortedTracks.map((track, index) => (
+              <TrackCard
+                key={track.id}
+                track={track}
+                index={index + 1}
+                variant="list"
+                isFavorite={favoriteIds.has(track.id)}
+                onToggleFavorite={() => dispatch(toggleFavorite(track))}
+                onClick={() => handlePlayRecommendation(track)}
+              />
+            ))}
       </div>
     </Page>
   );

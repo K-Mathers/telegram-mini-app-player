@@ -8,7 +8,7 @@ interface ILayout {}
 const Layout = ({}: ILayout) => {
   return (
     <div className="main">
-      <main className="layout_content">
+      <main className="layout-content">
         <Outlet />
       </main>
       <PlayerWidget />

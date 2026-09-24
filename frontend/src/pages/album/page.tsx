@@ -5,6 +5,7 @@ import {
   selectTracks,
   selectTrackStatus,
   TrackCard,
+  TrackCardSkeleton,
 } from "@/entities/track";
 import Splash from "@/shared/ui/Splash/Splash";
 import { useEffect } from "react";
@@ -18,9 +19,9 @@ import { Page, PageHeader } from "@/shared/ui/page";
 import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite";
 import { useFavoriteIds } from "@/shared/hooks/useFavoriteIds";
 
-interface Ipage {}
+interface Ipage { }
 
-export const AlbumDetailPage = ({}: Ipage) => {
+export const AlbumDetailPage = ({ }: Ipage) => {
   const { albumId } = useParams<{ albumId: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -37,10 +38,6 @@ export const AlbumDetailPage = ({}: Ipage) => {
       dispatch(fetchAlbumTracks(albumId));
     }
   }, [albumId, dispatch]);
-
-  if (status == "loading" || status == "idle") {
-    return <Splash />;
-  }
 
   if (status == "failed") {
     return <div>Failed</div>;
@@ -77,16 +74,22 @@ export const AlbumDetailPage = ({}: Ipage) => {
       <PlayActionButtons tracks={tracks} collectionId={albumId} />
 
       <div className="album-tracks-list">
-        {tracks.map((track, index) => (
-          <TrackCard
-            key={track.id}
-            index={index + 1}
-            track={track}
-            isFavorite={favoriteIds.has(track.id)}
-            onToggleFavorite={() => dispatch(toggleFavorite(track))}
-            onClick={() => dispatch(playTrack(track, tracks))}
-          />
-        ))}
+        {(status === "loading" || status === "idle") ? (
+          Array.from({ length: 5 }).map((_, i) => (
+            <TrackCardSkeleton key={i} />
+          ))
+        ) : (
+          tracks.map((track, index) => (
+            <TrackCard
+              key={track.id}
+              index={index + 1}
+              track={track}
+              isFavorite={favoriteIds.has(track.id)}
+              onToggleFavorite={() => dispatch(toggleFavorite(track))}
+              onClick={() => dispatch(playTrack(track, tracks))}
+            />
+          ))
+        )}
       </div>
     </Page>
   );

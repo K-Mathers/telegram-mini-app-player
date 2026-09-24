@@ -9,8 +9,6 @@ const items = [
   { path: "/more", label: "More", icon: MoreHorizontal },
 ];
 
-interface IBottomNav {}
-
 export const BottomNav = () => {
   return (
     <nav className="bottom-nav">
@@ -20,7 +18,7 @@ export const BottomNav = () => {
           to={path}
           end={end}
           className={({ isActive }) =>
-            `bottom-nav__item ${isActive ? "bottom-nav__item--active" : ""}`
+            `bottom-nav-item ${isActive ? "bottom-nav-item-active" : ""}`
           }
         >
           <Icon size={22} strokeWidth={1.75} />

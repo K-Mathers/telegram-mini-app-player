@@ -39,7 +39,7 @@ export const PlaylistPage = () => {
     [favoritesList],
   );
 
-  const drugHandleEvent = (e: DragEndEvent) => {
+  const dragHandleEvent = (e: DragEndEvent) => {
     const { active, over } = e;
 
     if (over && active.id !== over.id) {
@@ -80,7 +80,7 @@ export const PlaylistPage = () => {
       <div className="">
         <DndContext
           collisionDetection={closestCenter}
-          onDragEnd={drugHandleEvent}
+          onDragEnd={dragHandleEvent}
         >
           <SortableContext
             items={tracksIds}

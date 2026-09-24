@@ -6,9 +6,7 @@ import { HomePage } from "./home/page";
 import Layout from "@/widgets/Layout/ui/Layout";
 import { AlbumDetailPage } from "./album/page";
 
-interface Iindex {}
-
-export const Routing = ({}: Iindex) => {
+export const Routing = () => {
   return (
     <Routes>
       <Route element={<Layout />}>

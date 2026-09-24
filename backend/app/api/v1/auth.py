@@ -65,8 +65,6 @@ async def verify_telegram_auth(request: AuthRequest, db: Annotated[AsyncSession,
         token_data = {"sub": str(user.id)}
         access_token = create_access_token(token_data)
 
-        print(f"The user has been saved! Their ID is: {user.id}")
-
         return {"access_token": access_token, "token_type": "bearer"}
     except ValueError as e:
         raise HTTPException(status_code=401, detail=str(e))
