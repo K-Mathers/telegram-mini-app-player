@@ -9,6 +9,7 @@ class Setting(BaseSettings):
     SUPABASE_SERVICE_KEY: str
     CORS_ORIGINS: str
     DEBUG: bool = False
+    WEBAPP_URL: str = "your_https_web_client"
 
     model_config = SettingsConfigDict(env_file=".env")
 

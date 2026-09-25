@@ -6,13 +6,43 @@ services:
     container_name: eminem_db
     restart: always
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: eminem_player
+      POSTGRES_USER: dev_admin
+      POSTGRES_PASSWORD: dummy_secret_password_x92
+      POSTGRES_DB: eminem_player_db
     ports:
-      - "5555:5432"
+      - "127.0.0.1:5555:5432"
     volumes:
-      - pgdata:/var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: eminem_api
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://dev_admin:dummy_secret_password_x92@db:5432/eminem_player_db
+
+  bot:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: eminem_bot
+    restart: always
+    depends_on:
+      - db
+      - api
+    command: python -m bot.main_bot
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://dev_admin:dummy_secret_password_x92@db:5432/eminem_player_db
 
 volumes:
   pgdata:

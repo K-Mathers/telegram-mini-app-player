@@ -12,8 +12,6 @@ dist-ssr
 *.local
 venv
 .env
-requirements.txt
-README2.md
 __pycache__/
 migrations/__pycache__/
 
@@ -26,7 +24,3 @@ migrations/__pycache__/
 *.njsproj
 *.sln
 *.sw?
-
-# test files
-seed.py
-get_test_token.py

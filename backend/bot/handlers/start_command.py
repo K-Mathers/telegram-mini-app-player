@@ -1,6 +1,7 @@
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from app.core.config import settings
 
 router = Router()
 
@@ -11,7 +12,7 @@ async def start_cmd(message: Message):
             [
                 InlineKeyboardButton(
                     text="Открыть Mini App",
-                    web_app=WebAppInfo(url="https://google.com")
+                    web_app=WebAppInfo(url=settings.WEBAPP_URL)
                 )
             ]
         ]

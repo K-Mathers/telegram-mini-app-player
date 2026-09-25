@@ -11,6 +11,12 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    allowedHosts: ["probable-footwork-getup.ngrok-free.dev"],
+    allowedHosts: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
   },
 });
