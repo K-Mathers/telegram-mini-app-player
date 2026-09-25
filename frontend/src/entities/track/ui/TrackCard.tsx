@@ -1,5 +1,5 @@
 import type { ITrack } from "../model/types";
-import { MoreVertical } from "lucide-react";
+import { GripVertical, MoreVertical } from "lucide-react";
 import "./TrackCard.css";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
 import FavoriteBtn from "@/features/toggle-favorite/ui/FavoriteBtn/FavoriteBtn";
@@ -101,7 +101,7 @@ export const TrackCard = ({
           onClick={(e) => e.stopPropagation()}
           {...(dragListeners ?? {})}
         >
-          <MoreVertical size={16} />
+          {dragListeners ? <GripVertical size={20} /> : <MoreVertical size={16} />}
         </button>
       </div>
     </div>

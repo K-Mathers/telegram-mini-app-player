@@ -23,7 +23,9 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (err) => {
-    if (axios.isAxiosError(err) && err.response?.status === 401) {
+    const isAuthVerify = err.config?.url?.includes("/auth/verify");
+
+    if (axios.isAxiosError(err) && err.response?.status === 401 && !isAuthVerify) {
       localStorage.removeItem("token");
       window.dispatchEvent(new Event("auth:expired"));
     }

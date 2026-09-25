@@ -14,7 +14,15 @@ import { toggleFavorite } from "@/features/toggle-favorite/model/toggleFavorite"
 import { PlayActionButtons } from "@/features/play-collection";
 import { formatDuration } from "@/shared/lib/format/fortmatDuration";
 import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
-import { DndContext, closestCenter, type DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCenter,
+  type DragEndEvent,
+  useSensor,
+  useSensors,
+  MouseSensor,
+  TouchSensor,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -61,6 +69,20 @@ export const PlaylistPage = () => {
     [favoritesList],
   );
 
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    }),
+  );
+
   return (
     <Page>
       <PageHeader title="Playlists" />
@@ -79,6 +101,7 @@ export const PlaylistPage = () => {
 
       <div className="">
         <DndContext
+          sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={dragHandleEvent}
         >

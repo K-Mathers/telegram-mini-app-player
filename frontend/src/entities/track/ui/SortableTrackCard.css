@@ -1,13 +1,36 @@
+.sortable-track-wrapper--dragging {
+  z-index: 100;
+  position: relative;
+}
+
 .sortable-track-wrapper--dragging .track-item {
-  opacity: 0.5;
-  background-color: rgba(255, 255, 255, 0.05);
+  opacity: 0.85;
+  background-color: rgba(255, 255, 255, 0.12);
   border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .track-more-btn--drag {
   cursor: grab;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #8e8e93);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.track-more-btn--drag:hover {
+  color: var(--text-primary, #ffffff);
 }
 
 .track-more-btn--drag:active {
   cursor: grabbing;
+  color: var(--text-primary, #ffffff);
+  transform: scale(1.1);
 }

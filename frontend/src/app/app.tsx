@@ -42,7 +42,9 @@ export const App = ({}: Iapp) => {
   useEffect(() => {
     const handleAuthExpired = () => {
       const initData = window.Telegram?.WebApp?.initData;
-      dispatch(authByTelegram(initData));
+      if (initData) {
+        dispatch(authByTelegram(initData));
+      }
     };
     window.addEventListener("auth:expired", handleAuthExpired);
     return () => window.removeEventListener("auth:expired", handleAuthExpired);

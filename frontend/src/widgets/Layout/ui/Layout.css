@@ -1,3 +1,12 @@
+.main {
+  max-width: 460px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--bg-surface, #121212);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+}
+
 .layout-content {
   padding-bottom: 50px;
 }

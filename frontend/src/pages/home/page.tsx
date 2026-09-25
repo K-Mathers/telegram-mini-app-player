@@ -11,7 +11,7 @@ import SortCollectionBtn from "@/features/sort-collection/ui/SortCollectionBtn";
 import { useSortedTracks } from "@/features/sort-collection/model/useSortedTracks";
 
 export const HomePage = () => {
-  const { recentlyPlayed, recommendation } = useHomeData();
+  const { recentlyPlayed, recommendation, status } = useHomeData();
   const dispatch = useDispatch<AppDispatch>();
   const favoriteIds = useFavoriteIds();
   const sortedTracks = useSortedTracks(recommendation);
